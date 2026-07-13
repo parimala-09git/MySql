@@ -1,0 +1,175 @@
+Day-1
+---------
+
+Frontend
+---------
+Frontend is a visual and interactive layer of a website or application that users directly see and interact with through a webserver or mobile app.
+
+It is also called as the client side because it runs on the users
+device(browser/mobile)
+
+Resposibilities of frontend
+----------------------------
+1. Display web Pages and User interface(UI).
+2. Accepts user input(forms, buttons, search boxes)
+3. Validates user input before sending it to the server.
+4. Calls backend API to fetch or send data.
+5. Display the response received from backend.
+6. Provides animations and interactive effects.
+by prepare frontend layer we are suing some technologies like HTML, CSS, jS, Bootstrap.
+
+
+Backend
+---------
+Backend is the server-side part of an application.
+users cannot see it directly, but it performs all the business logic, security, data processing, and database operations.
+
+It acts as the brain of the application.
+
+Responsibilities of Backend
+----------------------------
+1. Process client request.
+2. Implements business logic.
+3. Connects with database.
+4. Performs CRUD Operations.
+5. Authenticates and authorize users.
+6. Encrypts Passwords and Authorize users.
+6. Generate reports
+7. returns responses to the frontend.
+We have to use some languages to build backend java, .net, php, c++
+
+
+API(Application Programming Interfaces)
+----------------------------------------
+API is a set of rules and protocols that allows two different applications or systems to communicate and exchange data without exposing their internal implementation.
+
+It acts as a bridge between the frontend and backend between two different software systems.
+
+Advantages of APIS
+------------------
+1. Enables communication between different systems.
+2. Promotes code reusability.
+3. Platform independent
+4. Faster application development.
+5. Supports integration with third-party-services.
+6. Improves scalability
+7. Easy to maintain.
+
+
+Storage areas
+--------------
+As part of our applications we required to store data like customer information, billing info, calls info ..etc To store these data we require some storage areas. 
+
+There are two types of storage areas such as:
+
+1. Temporary storage areas
+---------------------------
+These are the memory areas where the data will be stored temporarily.
+example: All JVM memory areas (like heap, stack, methodarea, pc registers, native method stack). Once JVM is shutdown all these memory areas will be cleared automatically.
+
+2. Permanent storage areas
+---------------------------
+It is also known as persistent storage areas, where data will be stored permanently. 
+example: FileSystems, Databases, Dat warehouses... etc
+
+
+File management systems(FMS)
+-----------------------------
+A file management system is a system where data is stored in files on the operating system.
+Each application program must handle its own storage data. Retrival and updating file systems can be provided by the local operating systems.
+
+Files systems are best suitable for storing very less amount of information. 
+example: A library management system storing books in a separate text file likes books.txt, members.txt..etc
+
+Limitations of File Mangement Systems
+-------------------------------------
+1. Data Redundancy: Same data is stored in multiple files.
+2. Data Inconsistency: Updates in one file may not be reflected in another.
+3. Poor data security: No proper accessed control.
+4. Difficult Data Retrieval: Searching requires custom programs.
+5. Integrity Issues: No Constraints(ex: roll number uniqueness)
+6. Scalability Issues: Hard to manage as data grows.
+To overcome the above problems in File systems we should go for databases.
+
+
+Databases Management System(DBMS)
+---------------------------------- 
+A DBMS is a collection of programs that enables users to create, manage and manipulate databases.
+
+It acts as an interface between user and database.
+
+Advantages
+----------
+1. We can store huge amount of information in databases.
+2. Query Language support is available for every database and hence we perform database operations easily.
+3. To access data present in the database. Compulsory username and password must be required hence data is secured.
+4. Inside databases data will be stored in the form of tables. while developing databases table schemas, database admin fallows various normalization techniques and we can implement various constraints like Unique Key, Primary Key, Foreign Key..etc which prevent data manipulation. hence there is no chance off data inconsistency problems.
+
+Limitations of Databases
+------------------------
+1. Databases cannot store huge amount of information like (terabytes).
+2. Database can provide supports for only structured data(tabular data or relational data). and cannot provide supports for unstructured data or semi-structured data(like videos, audios, xml data).
+
+To overcome these problems, we should go for some more advanced databases like data warehouses, big data..etc.
+
+What are the differences between File Management System(FMS) and Database Management System(DBMS)
+--------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
