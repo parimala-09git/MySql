@@ -1,0 +1,100 @@
+SQL Identifiers
+----------------
+SQL Identifiers are names used to identify database objects such as
+database names, table names, column names, view names, index names, constraints, triggers, stored procedures... etc.
+
+while we are declaring identifiers, we have to follow some rules and regulations.
+
+1. The only allowed characters to define identifiers are a-z, A-Z, or 0-9,_,$
+2. Must begin with a letter or underscore(_)
+3. We can't declare identifiers with reserved words.
+4. Spaces are not considered to declare identifiers.
+5. Identifiers are case-sensitive.
+6. Max length to declare identifiers are 15 characters.
+
+SQL
+----
+SQL is a (structured query language) is standardized programming language specially designed for managing and manipulating relational databases. It provides a declarative syntax that allows users to define what data they want to retrieve, insert, update or delete without specifying exactly how databases should execute these operations.
+
+SQL Commands
+-------------
+Types of commands
+-->DDL: CREATE, ALTER, DROP, TRUNCATE, RENAME
+-->DML: INSERT, UPDATE, DELETE
+-->DCL: GRANT, REVOKE
+-->TCL: COMMIT, ROLLBACK, SAVEPOINT
+-->DQL: SELECT
+
+1.DDL(Data Definition Language):
+---------------------------------
+def: DDL commands are used to define, create, modify and delete the structure of a database objects such as databases, tables, views, indexes and constraints./
+-->Create: By using these command to create a new databases, tables, views, indexes..etc.
+-->Alter: By using alter command we can modify  the structure of an existing table. like(add column, drop column, rename column, modify datatype, add constraints)
+-->Drop: Deletes an entire database objects perminently like(databases, tables, view, indexes.. etc)
+-->Truncate: By using the truncate command, delete all records from a table without deleting the table.
+-->Rename: It is used to rename the database object names. 
+
+2.DML(Data Manipulation Language):
+-----------------------------------
+def: It manages data stored within database objects.
+
+-->Insert: By using insert command we can insert some records into a table.
+-->Update: By using the update command we can update the records based on some condition.
+-->Delete: By using this delete command we can delete some records based on a condition.
+-->Lock: Controls concurrency by locking a table restrict accesses from other transactions while it is being modified.
+
+3.DCL(Data Control Language):
+------------------------------
+def: Manages permissions and access control on database objects.
+-->Grant: Gives specific privileges or permissions(such as select, update, insert, delete, all privileges) to a database user or role.
+-->Revoke: Removes previously granted permission  from database user or role. Restricting their access to database objects.
+
+4.TCL(Transaction Control Language):
+-------------------------------------
+def: It manages transactions to maintain data integrity.
+-->Commit: Permanently saves all changes made during the current transaction to the database, making them visible to other users.
+-->Rollback: Undoes/reverts changes made during the current transaction back to the last committed state or a savepoint in case of an error.
+-->SavePoint: Set of temporary markers within a transaction to you which you can later rollback, without undoing the entire transaction.
+
+5.DQL(Data Query Language):
+----------------------------
+def: It is used to fetch or retrieve data from the databases.
+-->Select: Retrieve data from one or more tables or views based on specified columns and conditions. It is the most frequently used command in sql.
+
+Create
+-------
+How to create a database?
+--------------------------
+syntax: Create database database_name;
+example: create database pfs4;
+
+how to drop the database
+-------------------------
+syntax: drop database database-name;
+example: drop database database-name;
+
+CREATE TABLE
+--------------
+CREATE TABLE TABLE-NAME(
+column-name data-type(size) constraint,
+column-name data-type(size),
+column-name data-type(size),
+column-name data-type(size),
+---------------
+-------------
+);
+
+
+
+use da4;
+
+CREATE TABLE EMPLOYEES(
+EMPID CHAR(5),
+FNAME VARCHAR(30)
+LNAME VARCHAR(100),
+AGE INT,
+DOJ DATE,
+ADDRESS TINYTEXT,
+DEPT VARCHAR(20)
+);
+
