@@ -1,0 +1,361 @@
+DML DAY 5
+========
+1.INSERT:-
+syntax:- insert into table-name(column-names)values(column-values);
+2.UPDATE
+
+"C:\MySQL\MySQLclassnotes.txt\DML day 5.txt"
+
+mysql> use da4;
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_da4 |
++---------------+
+| codegnan_emp  |
+| company_staff |
++---------------+
+2 rows in set (0.01 sec)
+
+mysql> DESC CODEGNAN_EMP;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| EMPID     | char(5)     | YES  |     | NULL    |       |
+| FIRSTNAME | varchar(30) | YES  |     | NULL    |       |
+| LASTNAME  | varchar(30) | YES  |     | NULL    |       |
+| AGE       | int         | YES  |     | NULL    |       |
+| DOJ       | date        | YES  |     | NULL    |       |
+| ADDRESS   | tinytext    | YES  |     | NULL    |       |
+| DEPT      | varchar(50) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> INSERT INTO CODEGNAN_EMP(EMPID,FIRSTNAME,LASTNAME,AGE,DOJ,ADDRESS,DEPT)VALUES('E0001','MALLI','ARJUN','27','2024-04-20'.'HYD',
+    -> INSERT INTO CODEGNAN_EMP(EMPID,FIRSTNAME,LASTNAME,AGE,DOJ,ADDRESS,DEPT)VALUES('E0001','MALLI','ARJUN','27','2024-04-20'.'HYD',;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.'HYD',
+INSERT INTO CODEGNAN_EMP(EMPID,FIRSTNAME,LASTNAME,AGE,DOJ,ADDRESS,DEPT)V' at line 1
+mysql> INSERT INTO CODEGNAN_EMP(EMPID,FIRSTNAME,LASTNAME,AGE,DOJ,ADDRESS,DEPT)VALUES('E0001','MALLI','ARJUN','27','2024-04-20'.'HYD','JAVA');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.'HYD','JAVA')' at line 1
+mysql> INSERT INTO CODEGNAN_EMP(EMPID,FIRSTNAME,LASTNAME,AGE,DOJ,ADDRESS,DEPT)VALUES
+    -> ('E0001','MALLI','ARJUN','27','2024-04-20','HYD','JAVA');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT*FROM CODEGNAN_EMP;
++-------+-----------+----------+------+------------+---------+------+
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT |
++-------+-----------+----------+------+------------+---------+------+
+| E0001 | MALLI     | ARJUN    |   27 | 2024-04-20 | HYD     | JAVA |
++-------+-----------+----------+------+------------+---------+------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO CODEGNAN_EMP(EMPID,FIRSTNAME,LASTNAME,AGE,DOJ,ADDRESS,DEPT)VALUES
+    -> ('E0002','SATYA','MONICA','21','2020-07-17','BNG','SALES'),
+    -> ('E0003','CHANDU','GANDHA','20','2005-05-12','VTZ','HR');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT*FROM CODEGNAN_EMP;
++-------+-----------+----------+------+------------+---------+-------+
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT  |
++-------+-----------+----------+------+------------+---------+-------+
+| E0001 | MALLI     | ARJUN    |   27 | 2024-04-20 | HYD     | JAVA  |
+| E0002 | SATYA     | MONICA   |   21 | 2020-07-17 | BNG     | SALES |
+| E0003 | CHANDU    | GANDHA   |   20 | 2005-05-12 | VTZ     | HR    |
++-------+-----------+----------+------+------------+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO EMPLOYEEES(FIRSTNAME,DOJ,AGE,DEPT,ADDRESS,LNAME,EMPID) VALUES
+    -> ('SAI','2018-08-12','27','ADMIN','PUNE','KIRAN','E0004');
+ERROR 1146 (42S02): Table 'da4.employeees' doesn't exist
+mysql> SELECT*FROM CODEGNAN_EMP;
++-------+-----------+----------+------+------------+---------+-------+
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT  |
++-------+-----------+----------+------+------------+---------+-------+
+| E0001 | MALLI     | ARJUN    |   27 | 2024-04-20 | HYD     | JAVA  |
+| E0002 | SATYA     | MONICA   |   21 | 2020-07-17 | BNG     | SALES |
+| E0003 | CHANDU    | GANDHA   |   20 | 2005-05-12 | VTZ     | HR    |
++-------+-----------+----------+------+------------+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> INSERT INTO CODEGNAN_EMP(FIRSTNAME,DOJ,AGE,DEPT,ADDRESS,LNAME,EMPID) VALUES
+    -> ('SAI','2018-08-12','27','ADMIN','PUNE','KIRAN','E0004');
+ERROR 1054 (42S22): Unknown column 'LNAME' in 'field list'
+mysql> INSERT INTO EMPLOYEEES(FIRSTNAME,DOJ,AGE,DEPT,ADDRESS,LASTNAME,EMPID) VALUES
+    -> ('SAI','2018-08-12','27','ADMIN','PUNE','KIRAN','E0004');
+ERROR 1146 (42S02): Table 'da4.employeees' doesn't exist
+mysql> INSERT INTO CODEGNAN_EMP(FIRSTNAME,DOJ,AGE,DEPT,ADDRESS,LASTNAME,EMPID) VALUES
+    -> ('SAI','2018-08-12','27','ADMIN','PUNE','KIRAN','E0004');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT*FROM CODEGNAN_EMP;
++-------+-----------+----------+------+------------+---------+-------+
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT  |
++-------+-----------+----------+------+------------+---------+-------+
+| E0001 | MALLI     | ARJUN    |   27 | 2024-04-20 | HYD     | JAVA  |
+| E0002 | SATYA     | MONICA   |   21 | 2020-07-17 | BNG     | SALES |
+| E0003 | CHANDU    | GANDHA   |   20 | 2005-05-12 | VTZ     | HR    |
+| E0004 | SAI       | KIRAN    |   27 | 2018-08-12 | PUNE    | ADMIN |
++-------+-----------+----------+------+------------+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> --TO INSERT VALUES BY USING SIMPLE SYNTAX
+    -> ^C
+mysql> INSERT INTO CODEGNAN_EMP
+    -> VALUES
+    -> ('E0005','SAI','VARDHAN','23','2024-09-23','HYD','PYTHON');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT*FROM CODEGNAN_EMP;
++-------+-----------+----------+------+------------+---------+--------+
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT   |
++-------+-----------+----------+------+------------+---------+--------+
+| E0001 | MALLI     | ARJUN    |   27 | 2024-04-20 | HYD     | JAVA   |
+| E0002 | SATYA     | MONICA   |   21 | 2020-07-17 | BNG     | SALES  |
+| E0003 | CHANDU    | GANDHA   |   20 | 2005-05-12 | VTZ     | HR     |
+| E0004 | SAI       | KIRAN    |   27 | 2018-08-12 | PUNE    | ADMIN  |
+| E0005 | SAI       | VARDHAN  |   23 | 2024-09-23 | HYD     | PYTHON |
++-------+-----------+----------+------+------------+---------+--------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO CODEGNAN_EMP
+    -> VALUES
+    -> ('E0006','RAHUL','SHARMA','34','2026-03-18','NOIDA','DEV'),
+    -> ('E0007','NANDINI','REDDY','24','2021-03-07','DEHLI','QA');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT*FROM CODEGNAN_EMP;
++-------+-----------+----------+------+------------+---------+--------+
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT   |
++-------+-----------+----------+------+------------+---------+--------+
+| E0001 | MALLI     | ARJUN    |   27 | 2024-04-20 | HYD     | JAVA   |
+| E0002 | SATYA     | MONICA   |   21 | 2020-07-17 | BNG     | SALES  |
+| E0003 | CHANDU    | GANDHA   |   20 | 2005-05-12 | VTZ     | HR     |
+| E0004 | SAI       | KIRAN    |   27 | 2018-08-12 | PUNE    | ADMIN  |
+| E0005 | SAI       | VARDHAN  |   23 | 2024-09-23 | HYD     | PYTHON |
+| E0006 | RAHUL     | SHARMA   |   34 | 2026-03-18 | NOIDA   | DEV    |
+| E0007 | NANDINI   | REDDY    |   24 | 2021-03-07 | DEHLI   | QA     |
++-------+-----------+----------+------+------------+---------+--------+
+7 rows in set (0.00 sec)
+
+mysql> INSERT INTO CODEGNAN_EMP
+    -> VALUES
+    -> ^C
+mysql> INSERT INTO CODEGNAN_EMP(EMPID,FIRSTNAME,DOJ,DEPT)
+    -> VALUES
+    -> ('E0008','ARUN','1999-05-07','MARKETING');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT*FROM CODEGNAN_EMP;
++-------+-----------+----------+------+------------+---------+-----------+
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT      |
++-------+-----------+----------+------+------------+---------+-----------+
+| E0001 | MALLI     | ARJUN    |   27 | 2024-04-20 | HYD     | JAVA      |
+| E0002 | SATYA     | MONICA   |   21 | 2020-07-17 | BNG     | SALES     |
+| E0003 | CHANDU    | GANDHA   |   20 | 2005-05-12 | VTZ     | HR        |
+| E0004 | SAI       | KIRAN    |   27 | 2018-08-12 | PUNE    | ADMIN     |
+| E0005 | SAI       | VARDHAN  |   23 | 2024-09-23 | HYD     | PYTHON    |
+| E0006 | RAHUL     | SHARMA   |   34 | 2026-03-18 | NOIDA   | DEV       |
+| E0007 | NANDINI   | REDDY    |   24 | 2021-03-07 | DEHLI   | QA        |
+| E0008 | ARUN      | NULL     | NULL | 1999-05-07 | NULL    | MARKETING |
++-------+-----------+----------+------+------------+---------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> INSERT INTO CODEGNAN_EMP SET
+    -> EMPID-'E0009',
+    -> FIRSTNAME-'SUDHEER',
+    -> LASTNAME-'KUMAR',
+    -> AGE--'52',
+    -> DOJ-'1999-09-24',
+    -> ADDRESS-'MUMBAI',
+    -> DEPT-'SALES';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-'E0009',
+FIRSTNAME-'SUDHEER',
+LASTNAME-'KUMAR',
+AGE--'52',
+DOJ-'1999-09-24',
+AD' at line 2
+mysql> INSERT INTO CODEGNAN_EMP SET
+    -> EMPID-'E0009',
+    -> FIRSTNAME-'SUDHEER',
+    -> LASTNAME-'KUMAR',
+    -> AGE-'52',
+    -> DOJ-'1999-09-24',
+    -> ADDRESS-'MUMBAI',
+    -> DEPT-'SALES';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-'E0009',
+FIRSTNAME-'SUDHEER',
+LASTNAME-'KUMAR',
+AGE-'52',
+DOJ-'1999-09-24',
+ADD' at line 2
+mysql> INSERT INTO CODEGNAN_EMP SET
+    -> EMPID='E0009',
+    -> FIRSTNAME='SUDHEER',
+    -> AGE='52',
+    -> DOJ='1999-09-24',
+    -> ADDRESS='MUMBAI',
+    -> DEPT='SALES';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT*FROM CODEGNAN_EMP;
++-------+-----------+----------+------+------------+---------+-----------+
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT      |
++-------+-----------+----------+------+------------+---------+-----------+
+| E0001 | MALLI     | ARJUN    |   27 | 2024-04-20 | HYD     | JAVA      |
+| E0002 | SATYA     | MONICA   |   21 | 2020-07-17 | BNG     | SALES     |
+| E0003 | CHANDU    | GANDHA   |   20 | 2005-05-12 | VTZ     | HR        |
+| E0004 | SAI       | KIRAN    |   27 | 2018-08-12 | PUNE    | ADMIN     |
+| E0005 | SAI       | VARDHAN  |   23 | 2024-09-23 | HYD     | PYTHON    |
+| E0006 | RAHUL     | SHARMA   |   34 | 2026-03-18 | NOIDA   | DEV       |
+| E0007 | NANDINI   | REDDY    |   24 | 2021-03-07 | DEHLI   | QA        |
+| E0008 | ARUN      | NULL     | NULL | 1999-05-07 | NULL    | MARKETING |
+| E0009 | SUDHEER   | NULL     |   52 | 1999-09-24 | MUMBAI  | SALES     |
++-------+-----------+----------+------+------------+---------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> UPDATE CODEGNAN_EMP SET LASTNAME='SHARMA' WHERE EMPID='E0007';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT*FROM CODEGNAN_EMP;
++-------+-----------+----------+------+------------+---------+-----------+
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT      |
++-------+-----------+----------+------+------------+---------+-----------+
+| E0001 | MALLI     | ARJUN    |   27 | 2024-04-20 | HYD     | JAVA      |
+| E0002 | SATYA     | MONICA   |   21 | 2020-07-17 | BNG     | SALES     |
+| E0003 | CHANDU    | GANDHA   |   20 | 2005-05-12 | VTZ     | HR        |
+| E0004 | SAI       | KIRAN    |   27 | 2018-08-12 | PUNE    | ADMIN     |
+| E0005 | SAI       | VARDHAN  |   23 | 2024-09-23 | HYD     | PYTHON    |
+| E0006 | RAHUL     | SHARMA   |   34 | 2026-03-18 | NOIDA   | DEV       |
+| E0007 | NANDINI   | SHARMA   |   24 | 2021-03-07 | DEHLI   | QA        |
+| E0008 | ARUN      | NULL     | NULL | 1999-05-07 | NULL    | MARKETING |
+| E0009 | SUDHEER   | NULL     |   52 | 1999-09-24 | MUMBAI  | SALES     |
++-------+-----------+----------+------+------------+---------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT*FROM CODEGNAN_EMP WHERE EMPID='E0007';
++-------+-----------+----------+------+------------+---------+------+
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT |
++-------+-----------+----------+------+------------+---------+------+
+| E0007 | NANDINI   | SHARMA   |   24 | 2021-03-07 | DEHLI   | QA   |
++-------+-----------+----------+------+------------+---------+------+
+1 row in set (0.00 sec)
+
+mysql> UPDATE CODEGNAN_EMP SET LASTNAME='KUMAR',AGE='23',ADDRESS='VSP' WHERE EMPID='E0007';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT*FROM CODEGNAN_EMP WHERE EMPID='E0008';
++-------+-----------+----------+------+------------+---------+-----------+
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT      |
++-------+-----------+----------+------+------------+---------+-----------+
+| E0008 | ARUN      | NULL     | NULL | 1999-05-07 | NULL    | MARKETING |
++-------+-----------+----------+------+------------+---------+-----------+
+1 row in set (0.01 sec)
+
+mysql> UPDATE CODEGNAN_EMP SET LASTNAME='KUMAR',AGE='23',ADDRESS='VSP' WHERE EMPID='E0008';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> ^C
+mysql> SELECT*FROM CODEGNAN_EMP WHERE EMPID='E0008';
++-------+-----------+----------+------+------------+---------+-----------+
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT      |
++-------+-----------+----------+------+------------+---------+-----------+
+| E0008 | ARUN      | KUMAR    |   23 | 1999-05-07 | VSP     | MARKETING |
++-------+-----------+----------+------+------------+---------+-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT*FROM CODEGNAN_EMP;
++-------+-----------+----------+------+------------+---------+-----------+
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT      |
++-------+-----------+----------+------+------------+---------+-----------+
+| E0001 | MALLI     | ARJUN    |   27 | 2024-04-20 | HYD     | JAVA      |
+| E0002 | SATYA     | MONICA   |   21 | 2020-07-17 | BNG     | SALES     |
+| E0003 | CHANDU    | GANDHA   |   20 | 2005-05-12 | VTZ     | HR        |
+| E0004 | SAI       | KIRAN    |   27 | 2018-08-12 | PUNE    | ADMIN     |
+| E0005 | SAI       | VARDHAN  |   23 | 2024-09-23 | HYD     | PYTHON    |
+| E0006 | RAHUL     | SHARMA   |   34 | 2026-03-18 | NOIDA   | DEV       |
+| E0007 | NANDINI   | KUMAR    |   23 | 2021-03-07 | VSP     | QA        |
+| E0008 | ARUN      | KUMAR    |   23 | 1999-05-07 | VSP     | MARKETING |
+| E0009 | SUDHEER   | NULL     |   52 | 1999-09-24 | MUMBAI  | SALES     |
++-------+-----------+----------+------+------------+---------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> UPDATE CODEGNAN_EMP SET LASTNAME='SHARMA',AGE='15',ADDRESS='DELHI' WHERE EMPID='E0007';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT*FROM CODEGNAN_EMP WHERE EMPID='E0007';
++-------+-----------+----------+------+------------+---------+------+
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT |
++-------+-----------+----------+------+------------+---------+------+
+| E0007 | NANDINI   | SHARMA   |   15 | 2021-03-07 | DELHI   | QA   |
++-------+-----------+----------+------+------------+---------+------+
+1 row in set (0.00 sec)
+
+mysql> DELETE FOM CODEGNAN_EMP WHERE LNAME='SHARMA';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CODEGNAN_EMP WHERE LNAME='SHARMA'' at line 1
+mysql> DELETE FROM CODEGNAN_EMP WHERE LNAME='SHARMA';
+ERROR 1054 (42S22): Unknown column 'LNAME' in 'where clause'
+mysql> DELETE FROM CODEGNAN_EMP WHERE LASTNAME='SHARMA';
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> SELECT*FROM CODEGNAN_EMP;
++-------+-----------+----------+------+------------+---------+-----------+
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT      |
++-------+-----------+----------+------+------------+---------+-----------+
+| E0001 | MALLI     | ARJUN    |   27 | 2024-04-20 | HYD     | JAVA      |
+| E0002 | SATYA     | MONICA   |   21 | 2020-07-17 | BNG     | SALES     |
+| E0003 | CHANDU    | GANDHA   |   20 | 2005-05-12 | VTZ     | HR        |
+| E0004 | SAI       | KIRAN    |   27 | 2018-08-12 | PUNE    | ADMIN     |
+| E0005 | SAI       | VARDHAN  |   23 | 2024-09-23 | HYD     | PYTHON    |
+| E0008 | ARUN      | KUMAR    |   23 | 1999-05-07 | VSP     | MARKETING |
+| E0009 | SUDHEER   | NULL     |   52 | 1999-09-24 | MUMBAI  | SALES     |
++-------+-----------+----------+------+------------+---------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> DELETE FROM CODEGNAN_EMP WHERE EMPID='E0003';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT*FROM CODEGNAN_EMP;
++-------+-----------+----------+------+------------+---------+-----------+
+| EMPID | FIRSTNAME | LASTNAME | AGE  | DOJ        | ADDRESS | DEPT      |
++-------+-----------+----------+------+------------+---------+-----------+
+| E0001 | MALLI     | ARJUN    |   27 | 2024-04-20 | HYD     | JAVA      |
+| E0002 | SATYA     | MONICA   |   21 | 2020-07-17 | BNG     | SALES     |
+| E0004 | SAI       | KIRAN    |   27 | 2018-08-12 | PUNE    | ADMIN     |
+| E0005 | SAI       | VARDHAN  |   23 | 2024-09-23 | HYD     | PYTHON    |
+| E0008 | ARUN      | KUMAR    |   23 | 1999-05-07 | VSP     | MARKETING |
+| E0009 | SUDHEER   | NULL     |   52 | 1999-09-24 | MUMBAI  | SALES     |
++-------+-----------+----------+------+------------+---------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> TRUNCATE TABLE CODEGNAN_EMP;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> SHOW TABLES;
++---------------+
+| Tables_in_da4 |
++---------------+
+| codegnan_emp  |
+| company_staff |
++---------------+
+2 rows in set (0.01 sec)
+
+mysql> DROP TABLE CODEGNAN_EMP;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> SHOW TABLES;
++---------------+
+| Tables_in_da4 |
++---------------+
+| company_staff |
++---------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT*FROM CODEGNAN_EMP;
+ERROR 1146 (42S02): Table 'da4.codegnan_emp' doesn't exist
+mysql>
