@@ -1,0 +1,390 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use da4;
+Database changed
+mysql> CREATE TABLE EMPLOYEES(
+    -> EMPID INT AUTO_INCREMENT PRIMARY KEY,
+    -> NAME VARCHAR(20),
+    -> DEPARTMENT VARCHAR(30)
+    -> );
+ERROR 1050 (42S01): Table 'employees' already exists
+mysql> DROP EMPLOYEES;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'EMPLOYEES' at line 1
+mysql> DROP TABLE EMPLOYEES;
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> use da4;
+Database changed
+mysql> CREATE TABLE EMPLOYEES(
+    -> EMPID INT AUTO_INCREMENT PRIMARY KEY,
+    -> NAME VARCHAR(20),
+    -> DEPARTMENT VARCHAR(30)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> DESC EMPLOYEES;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| EMPID      | int         | NO   | PRI | NULL    | auto_increment |
+| NAME       | varchar(20) | YES  |     | NULL    |                |
+| DEPARTMENT | varchar(30) | YES  |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.06 sec)
+
+mysql> INSERT INTO EMPLOYEES (NAME,DEPARTMENT) VALUES
+    -> ('PARI','IT'),
+    -> ('Priya','HR'),
+    -> ('JAANU','FINANCE');
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> DESC EMPLOYEES;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| EMPID      | int         | NO   | PRI | NULL    | auto_increment |
+| NAME       | varchar(20) | YES  |     | NULL    |                |
+| DEPARTMENT | varchar(30) | YES  |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql>
+mysql> SELECT*FROM EMPLOYEES;
++-------+-------+------------+
+| EMPID | NAME  | DEPARTMENT |
++-------+-------+------------+
+|     1 | PARI  | IT         |
+|     2 | Priya | HR         |
+|     3 | JAANU | FINANCE    |
++-------+-------+------------+
+3 rows in set (0.00 sec)
+
+mysql> SHOW TABLES;
++---------------+
+| Tables_in_da4 |
++---------------+
+| company_staff |
+| employees     |
++---------------+
+2 rows in set (0.01 sec)
+
+mysql> CREATE TABLE BACKUPEMPLOYEES AS SELECT*FROM EMPLOYEES;
+Query OK, 3 rows affected (0.03 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SHOW TABLES;
++-----------------+
+| Tables_in_da4   |
++-----------------+
+| backupemployees |
+| company_staff   |
+| employees       |
++-----------------+
+3 rows in set (0.00 sec)
+
+mysql> DESC BACKUPEMPLOYEES;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| EMPID      | int         | NO   |     | 0       |       |
+| NAME       | varchar(20) | YES  |     | NULL    |       |
+| DEPARTMENT | varchar(30) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT*FROM BACKUPEMPLOYEES;
++-------+-------+------------+
+| EMPID | NAME  | DEPARTMENT |
++-------+-------+------------+
+|     1 | PARI  | IT         |
+|     2 | Priya | HR         |
+|     3 | JAANU | FINANCE    |
++-------+-------+------------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE TABLE BACKUPCOMPANY_STAFF AS SELECT*FROM COMPANY_STAFF;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SHOW TABLES;
++---------------------+
+| Tables_in_da4       |
++---------------------+
+| backupcompany_staff |
+| backupemployees     |
+| company_staff       |
+| employees           |
++---------------------+
+4 rows in set (0.00 sec)
+
+mysql> DESC BACKUPCOMAPNY_STAFF;
+ERROR 1146 (42S02): Table 'da4.backupcomapny_staff' doesn't exist
+mysql> DESC BACKUPCOMPANY_STAFF;
++-----------------+----------------------------------------------------+------+-----+---------+-------+
+| Field           | Type                                               | Null | Key | Default | Extra |
++-----------------+----------------------------------------------------+------+-----+---------+-------+
+| COMPANY_NAME    | varchar(30)                                        | YES  |     | NULL    |       |
+| EMP_ID          | int                                                | YES  |     | NULL    |       |
+| AGE             | tinyint                                            | YES  |     | NULL    |       |
+| EXPERIENCE      | smallint                                           | YES  |     | NULL    |       |
+| GENDER          | char(1)                                            | YES  |     | NULL    |       |
+| EMPLOYEE_NAME   | varchar(30)                                        | YES  |     | NULL    |       |
+| QUALIFICATION   | varchar(100)                                       | YES  |     | NULL    |       |
+| ADDRESS         | tinytext                                           | YES  |     | NULL    |       |
+| SALARY          | decimal(11,2)                                      | YES  |     | NULL    |       |
+| DEPARTMENT      | enum('HR','IT','SALES','FINANCE','SUPPORT')        | YES  |     | NULL    |       |
+| STATUS          | varchar(50)                                        | YES  |     | NULL    |       |
+| SKILLS          | set('JAVA','PYTHON','SQL','EXCEL','COMMUNICATION') | YES  |     | NULL    |       |
+| LAST_UPDATE     | date                                               | YES  |     | NULL    |       |
+| DATE_OF_JOINING | date                                               | YES  |     | NULL    |       |
+| EMAIL           | varchar(50)                                        | YES  |     | NULL    |       |
++-----------------+----------------------------------------------------+------+-----+---------+-------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT*FROM BACKUPCOMPANY_STAFF;
+Empty set (0.00 sec)
+
+mysql> CREATE TABLE PRODUCTS(
+    -> PRODUCTID INT
+    -> ^C
+mysql> CREATE TABLE PRODUCTS(
+    -> PRODUCTID INT AUTO_INCREMENT PRIMARY KEY,
+    -> PRODUCTNAME VARCHAR(20),
+    -> PRICE DECIMAL(10,2),
+    -> QUANTITY INT,
+    -> TOTALAMOUNT DECIMAL(10,2) GENERATED ALWAYS AS(PRICE*QUANTITY)STORED
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> SHOW TABLES;
++---------------------+
+| Tables_in_da4       |
++---------------------+
+| backupcompany_staff |
+| backupemployees     |
+| company_staff       |
+| employees           |
+| products            |
++---------------------+
+5 rows in set (0.00 sec)
+
+mysql> DESC PRODUCTS;
++-------------+---------------+------+-----+---------+------------------+
+| Field       | Type          | Null | Key | Default | Extra            |
++-------------+---------------+------+-----+---------+------------------+
+| PRODUCTID   | int           | NO   | PRI | NULL    | auto_increment   |
+| PRODUCTNAME | varchar(20)   | YES  |     | NULL    |                  |
+| PRICE       | decimal(10,2) | YES  |     | NULL    |                  |
+| QUANTITY    | int           | YES  |     | NULL    |                  |
+| TOTALAMOUNT | decimal(10,2) | YES  |     | NULL    | STORED GENERATED |
++-------------+---------------+------+-----+---------+------------------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO PRODUCTS(PRODUCTNAME,PRICE,QUANTITY) VALUES
+    -> ('SMARTPHONE',18000,2)
+    -> ('EARPHONES',1000,4)
+    -> ('POWERBANK',1500,3);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '('EARPHONES',1000,4)
+('POWERBANK',1500,3)' at line 3
+mysql> ^C
+mysql> INSERT INTO PRODUCTS(PRODUCTNAME,PRICE,QUANTITY) VALUES
+    -> ('SMARTPHONE',18000,2),
+    -> ('EARPHONES',1000,4),
+    -> ('POWERBANK',1500,3);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT*FROM PRODUCTS;
++-----------+-------------+----------+----------+-------------+
+| PRODUCTID | PRODUCTNAME | PRICE    | QUANTITY | TOTALAMOUNT |
++-----------+-------------+----------+----------+-------------+
+|         1 | SMARTPHONE  | 18000.00 |        2 |    36000.00 |
+|         2 | EARPHONES   |  1000.00 |        4 |     4000.00 |
+|         3 | POWERBANK   |  1500.00 |        3 |     4500.00 |
++-----------+-------------+----------+----------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> UPDATE PRODUCTS SET PRICE=17000 WHERE PRODUCTID=1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT*FROM PRODUCTS;
++-----------+-------------+----------+----------+-------------+
+| PRODUCTID | PRODUCTNAME | PRICE    | QUANTITY | TOTALAMOUNT |
++-----------+-------------+----------+----------+-------------+
+|         1 | SMARTPHONE  | 17000.00 |        2 |    34000.00 |
+|         2 | EARPHONES   |  1000.00 |        4 |     4000.00 |
+|         3 | POWERBANK   |  1500.00 |        3 |     4500.00 |
++-----------+-------------+----------+----------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE TABLE STUDENT(
+    -> ^C
+mysql>
+mysql> CREATE TABLE STUDENTS(
+    -> STUDENTID INT AUTO_INCREMENT PRIMARY KEY,
+    -> SNAME VARCHAR(20)
+    -> SMOBILE VARCHAR(10)
+    -> ^C
+mysql> CREATE TABLE STUDENTS(
+    -> STUDENTID INT AUTO_INCREMENT PRIMARY KEY,
+    -> SNAME VARCHAR(20),
+    -> SMOBILE VARCHAR(10),
+    -> SMARKS INT(3)
+    -> );
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> INSERT INTO STUDENTS(SNAME,SMOBILE,SMARKS) VALUES
+    -> ('SUNNY,'9876543216',79),
+    '> ('SUNNY,'9867568543',65),
+    -> ('SUNNY,'9867568543',65),
+    '> ^C
+mysql> INSERT INTO STUDENTS(SNAME,SMOBILE,SMARKS) VALUES
+    -> ('SUNNY,'9876543216',79),
+    '> ('BUNNY,'9867568543',65),
+    -> ('KAVYA','9657483883',75),
+    -> ('KAVYA','8675847654',80),
+    -> ('SRAVYA','9780863567',85);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '9876543216',79),
+('BUNNY,'9867568543',65),
+('KAVYA','9657483883',75),
+('KAVYA','' at line 2
+mysql> INSERT INTO STUDENTS(SNAME,SMOBILE,SMARKS) VALUES
+    -> ('SUNNY,'9867568543',65),
+    '> ('KAVYA','9657483883',75),
+    '> ('SRAVYA','9780863567',85),
+    '> ('SOWMYA','9788428767',89);
+    '> ^C
+mysql> INSERT INTO STUDENTS(SNAME,SMOBILE,SMARKS) VALUES
+    -> ('SRAVYA','9780863567',85);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO STUDENTS(SNAME,SMOBILE,SMARKS) VALUES
+    -> ('KAVYA','8675847654',80),
+    -> ('BUNNY,'9867568543',65),
+    '> ('SUNNY,'9876543216',79);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '9867568543',65),
+('SUNNY,'9876543216',79)' at line 3
+mysql> INSERT INTO STUDENTS(SNAME,SMOBILE,SMARKS) VALUES
+    -> ('SOWMYA','9788428767',89),
+    -> ('BUNNY','9867568543',65),
+    -> ('KAVYA','8675847654',80);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT*FROM STUDENTS;
++-----------+--------+------------+--------+
+| STUDENTID | SNAME  | SMOBILE    | SMARKS |
++-----------+--------+------------+--------+
+|         1 | SRAVYA | 9780863567 |     85 |
+|         2 | SOWMYA | 9788428767 |     89 |
+|         3 | BUNNY  | 9867568543 |     65 |
+|         4 | KAVYA  | 8675847654 |     80 |
++-----------+--------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> CREATE USER JANI IDENTIFIED BY 'JANI123';
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> CREATE USER BASHA IDENTIFIED BY 'BASHA123';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> GRANT SELECT,INSERT,UPDATEON STUDENTS TO JANI;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'STUDENTS TO JANI' at line 1
+mysql> GRANT SELECT,INSERT,UPDATEON ON STUDENTS TO JANI;
+ERROR 3619 (HY000): Illegal privilege level specified for students
+mysql> GRANT SELECT,INSERT,UPDATE ON STUDENTS TO JANI;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> GRANT SELECT,DELETE ON STUDENTS TO BASHA;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> GRANT ALL PRIVILEGES ON STUDENTS TO BASHA;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> REVOKE INSERT,UPDATE ON STUDENTS FROM JANI;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> REVOKE DELETE ON STUDENTS FROM BASHA;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+
+
+
+Microsoft Windows [Version 10.0.26200.8875]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>MySQL -u JANI -p
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 13
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> USE DA4;
+Database changed
+mysql> SELECT*FROM STUDENTS;
++-----------+--------+------------+--------+
+| STUDENTID | SNAME  | SMOBILE    | SMARKS |
++-----------+--------+------------+--------+
+|         1 | SRAVYA | 9780863567 |     85 |
+|         2 | SOWMYA | 9788428767 |     89 |
+|         3 | BUNNY  | 9867568543 |     65 |
+|         4 | KAVYA  | 8675847654 |     80 |
++-----------+--------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO STUDENTS VALUES(5,'JENNY','8567473827',27);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT*FROM STUDENTS;
++-----------+--------+------------+--------+
+| STUDENTID | SNAME  | SMOBILE    | SMARKS |
++-----------+--------+------------+--------+
+|         1 | SRAVYA | 9780863567 |     85 |
+|         2 | SOWMYA | 9788428767 |     89 |
+|         3 | BUNNY  | 9867568543 |     65 |
+|         4 | KAVYA  | 8675847654 |     80 |
+|         5 | JENNY  | 8567473827 |     27 |
++-----------+--------+------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE STUDENT SET SMARKS=78 WHERE SID=5;
+ERROR 1142 (42000): UPDATE command denied to user 'JANI'@'localhost' for table 'student'
+mysql> UPDATE STUDENTS SET SMARKS=78 WHERE SID=5;
+ERROR 1054 (42S22): Unknown column 'SID' in 'where clause'
+mysql> UPDATE STUDENTS SET SMARKS=78 WHERE STUDENTID=5;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT*FROM STUDENTS;
++-----------+--------+------------+--------+
+| STUDENTID | SNAME  | SMOBILE    | SMARKS |
++-----------+--------+------------+--------+
+|         1 | SRAVYA | 9780863567 |     85 |
+|         2 | SOWMYA | 9788428767 |     89 |
+|         3 | BUNNY  | 9867568543 |     65 |
+|         4 | KAVYA  | 8675847654 |     80 |
+|         5 | JENNY  | 8567473827 |     78 |
++-----------+--------+------------+--------+
+5 rows in set (0.00 sec)
