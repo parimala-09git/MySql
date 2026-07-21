@@ -1,0 +1,196 @@
+Constraints
+----------
+Constraints are rules applied to the table columns in MySQL to ensure that only valid and accurate data os stored in the database.
+
+in simple words:
+Constraints = Rules that control the data entered into a table.
+
+Why do we use Constraints 
+--------------------------
+1. Maintain data integrity.
+2. Prevent invalid data entry.
+3. Avoid duplicate records.
+4. Ensure relationships between tables.
+5. Make the database reliable and consistent.
+
+1. Not Null: It does not allow null values, but allows duplicate values
+2. Unique: It does not allow duplicate values but null values can be duplicate
+3. Primary key: It is the combination of unique + NOTNULL.
+4. Composite key: We can apply more than 2 primary key and 
+5. Foreign key: A foreign key is used to link 2 tables together or more than 2 tables.
+   A foreign key is a field or collection of fields in 1 table that refers to the primary key in another table. 
+   The table containing the foreign key is called the child table and the table containing the candidate key is called the referenced table or parent table.
+
+What are referential actions
+------------------------------
+referential actions defines what happens to child table data when parent table data is deleted or updated.
+
+On Delete Cascade
+On Update Cascade
+
+On Delete Set NULL;
+On Update Set Null;
+
+6. Check:
+7. default: Default values are taken.
+
+
+
+
+Operators
+----------
+https://github.com/mallikharjuna2000/mysqlqueries
+
+
+mysql> use da4;
+Database changed
+mysql> CREATE TABLE Products (
+    ->  id INT,
+    ->  name VARCHAR(100),
+    ->  price DECIMAL(10,2),
+    ->  qty INT
+    ->  );
+ERROR 1050 (42S01): Table 'products' already exists
+mysql>
+mysql>
+mysql> INSERT INTO Products VALUES
+    ->  (1, 'Pen', 10.00, 100),
+    ->  (2, 'Notebook', 25.00, 50),
+    ->  (3, 'Pencil', 5.00, 200),
+    ->  (4, 'Eraser', 3.00, 300),
+    ->  (5, 'Marker', 15.00, 80),
+    ->  (6, 'Scale', 20.00, 150),
+    ->  (7, 'Sharpener', 8.00, 120),
+    ->  (8, 'Geometry Box', 120.00, 40),
+    ->  (9, 'Sketch Pen', 60.00, 75),
+    ->  (10, 'Crayons', 90.00, 55);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> ^C
+mysql> use da4;
+Database changed
+mysql> CREATE TABLE Products (
+    ->  id INT,
+    ->  name VARCHAR(100),
+    ->  price DECIMAL(10,2),
+    ->  qty INT
+    ->  id INT,
+    -> ^C
+mysql> use d14;
+ERROR 1049 (42000): Unknown database 'd14'
+mysql> ^C
+mysql> use da4;
+Database changed
+mysql> CREATE TABLE Productsss (
+    ->  id INT,
+    ->  name VARCHAR(100),
+    ->  price DECIMAL(10,2),
+    ->  qty INT
+    ->  );
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> INSERT INTO Productsss VALUES
+    -> (1, 'Pen', 10.00, 100),
+    ->  (2, 'Notebook', 25.00, 50),
+    ->  (3, 'Pencil', 5.00, 200),
+    ->  (4, 'Eraser', 3.00, 300),
+    ->  (5, 'Marker', 15.00, 80),
+    ->  (6, 'Scale', 20.00, 150),
+    ->  (7, 'Sharpener', 8.00, 120),
+    ->  (8, 'Geometry Box', 120.00, 40),
+    ->  (9, 'Sketch Pen', 60.00, 75),
+    ->  (10, 'Crayons', 90.00, 55);
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> SELECT*FROM PRODUCTSSS;
++------+--------------+--------+------+
+| id   | name         | price  | qty  |
++------+--------------+--------+------+
+|    1 | Pen          |  10.00 |  100 |
+|    2 | Notebook     |  25.00 |   50 |
+|    3 | Pencil       |   5.00 |  200 |
+|    4 | Eraser       |   3.00 |  300 |
+|    5 | Marker       |  15.00 |   80 |
+|    6 | Scale        |  20.00 |  150 |
+|    7 | Sharpener    |   8.00 |  120 |
+|    8 | Geometry Box | 120.00 |   40 |
+|    9 | Sketch Pen   |  60.00 |   75 |
+|   10 | Crayons      |  90.00 |   55 |
++------+--------------+--------+------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT name, price, price+(price*0.12)as price.with_tax from products;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.with_tax from products' at line 1
+mysql> SELECT name, price, price+(price*0.12)as price_with_tax from products;
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> SELECT name, price,price+(price*0.12)as price_with_tax from productsss;
++--------------+--------+----------------+
+| name         | price  | price_with_tax |
++--------------+--------+----------------+
+| Pen          |  10.00 |        11.2000 |
+| Notebook     |  25.00 |        28.0000 |
+| Pencil       |   5.00 |         5.6000 |
+| Eraser       |   3.00 |         3.3600 |
+| Marker       |  15.00 |        16.8000 |
+| Scale        |  20.00 |        22.4000 |
+| Sharpener    |   8.00 |         8.9600 |
+| Geometry Box | 120.00 |       134.4000 |
+| Sketch Pen   |  60.00 |        67.2000 |
+| Crayons      |  90.00 |       100.8000 |
++--------------+--------+----------------+
+10 rows in set (0.00 sec)
+
+mysql> select name,price,price-5.0 as discounted price from productsss;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'price from productsss' at line 1
+mysql> select name,price,price-5.0 as discounted_price from productsss;
++--------------+--------+------------------+
+| name         | price  | discounted_price |
++--------------+--------+------------------+
+| Pen          |  10.00 |             5.00 |
+| Notebook     |  25.00 |            20.00 |
+| Pencil       |   5.00 |             0.00 |
+| Eraser       |   3.00 |            -2.00 |
+| Marker       |  15.00 |            10.00 |
+| Scale        |  20.00 |            15.00 |
+| Sharpener    |   8.00 |             3.00 |
+| Geometry Box | 120.00 |           115.00 |
+| Sketch Pen   |  60.00 |            55.00 |
+| Crayons      |  90.00 |            85.00 |
++--------------+--------+------------------+
+10 rows in set (0.00 sec)
+
+mysql> select name,price,price*qty as inventory_value from productsss;
++--------------+--------+-----------------+
+| name         | price  | inventory_value |
++--------------+--------+-----------------+
+| Pen          |  10.00 |         1000.00 |
+| Notebook     |  25.00 |         1250.00 |
+| Pencil       |   5.00 |         1000.00 |
+| Eraser       |   3.00 |          900.00 |
+| Marker       |  15.00 |         1200.00 |
+| Scale        |  20.00 |         3000.00 |
+| Sharpener    |   8.00 |          960.00 |
+| Geometry Box | 120.00 |         4800.00 |
+| Sketch Pen   |  60.00 |         4500.00 |
+| Crayons      |  90.00 |         4950.00 |
++--------------+--------+-----------------+
+10 rows in set (0.00 sec)
+
+mysql> select name,price,price*10 as 10_units from productsss;
++--------------+--------+----------+
+| name         | price  | 10_units |
++--------------+--------+----------+
+| Pen          |  10.00 |   100.00 |
+| Notebook     |  25.00 |   250.00 |
+| Pencil       |   5.00 |    50.00 |
+| Eraser       |   3.00 |    30.00 |
+| Marker       |  15.00 |   150.00 |
+| Scale        |  20.00 |   200.00 |
+| Sharpener    |   8.00 |    80.00 |
+| Geometry Box | 120.00 |  1200.00 |
+| Sketch Pen   |  60.00 |   600.00 |
+| Crayons      |  90.00 |   900.00 |
++--------------+--------+----------+
+10 rows in set (0.00 sec)
+
+ 
