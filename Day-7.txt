@@ -1,0 +1,89 @@
+TCL(transaction control language)
+----------------------------------
+def
+----
+The process of combining all related operations into a single unit and executing them according to the rule "either all operations should be succeed or none should be succeed". is called Transaction management.
+
+A transaction is considered a single unit of work and follows the principle
+
+"either all or none"
+
+example: Funds transfer.
+
+Consider a money transfer process between two accounts.
+
+1. Debit amount from the sender's account
+2.Credit amount into the receiver's account.
+
+Both operations should be executed as a single transaction.
+
+If the amount is debited from the sender's account successfully, but crediting the recover's account fails. It may lead to the data inconsistency problems.
+
+There are 2 types of transactions such as:
+
+1.Local Transactions
+-----------------------
+In local transactions, all operations of a transaction are executed in the same database.
+
+example: Funds transfer from one account to another account where both accounts belongs to the same bank is called local transactions.
+
+2.Global transactions
+------------------------
+In global transactions, operations of a transaction are executed on different databases.
+ 
+example: Funds transfer from one account to another account where both accounts belongs to the different banks is called global transactions. 
+
+
+ACID Properties:#notes
+-----------------------
+1. Atomicity: All or nothing
+2. Consistency: The database remains in a valid state
+3. Isolation: Transactions do not interface with each other
+4. Durability: Committed changes are permanent(time)
+
+TCL Commands
+--------------
+1.Commmit
+-----------
+
+What is locking
+----------------
+Locking is a mechanism used by the database to control concurrent access data.
+It ensures that multiple users accessing the same data simultaneously the database maintains consistency and integrity and prevent conflicts.
+
+1. Shared lock
+---------------
+Def: A shared lock allows a transaction to read data.
+Multiple transactions can hold a shared lock on the same row.
+No transaction can modify the row until all shared locks are released.
+
+Characteristics: 
+------------------
+Read only
+Multiple users can read simultaneously
+Blocks updates and deletes
+ 
+2. Exclusive lock:
+------------------
+Def: An exclusive lock allows a transaction to modify data.
+While an exclusive lock exists.
+No other transaction can read using a locking read or modify that row.
+Only the transaction holding the lock can update/delete the data.
+
+Characteristics
+----------------
+Used for INSERT, UPDATE, DELETE
+Only one Exclusive Lock at a time
+Blocks both reads (locking reads) and writes
+
+3. Intent Lock
+----------------
+An Intent Lock is a table-level lock that indicates a transaction intends to place row-level locks.
+It helps MySQL quickly determine whether a table-level lock conflicts with existing row locks.
+Users do not usually create Intent locks manually. InnoDB manages them automatically.
+
+Real-life example:
+Imagine a library:
+Shared Lock- Many students can read the same book at the same time.
+Exclusive Lock - One student borrows the book, so nobody else can read or borrow it until it is returned. 
+Intent lock-The librarian marks that someone is about to read or borrow books from a shelf, helping coordinate access without checking every book individually. 
